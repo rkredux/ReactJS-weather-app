@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:200');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+  font-size: 40px;
+}
+
+body > * {
+	box-sizing: inherit; 
+}
+
+div{
+	color: #C0C0C0; 
+    font-family: 'Montserrat', sans-serif;
+    padding: 5px; 
+	/*border: 2px dotted white; */
+}
+
+
+
+
+
+
+
