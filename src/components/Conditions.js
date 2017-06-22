@@ -5,9 +5,9 @@ class Conditions extends Component{
 	render(){
 		return(
 			<div className="row thirdrow">
-			  <p>Windspeed</p>
-			  <p>Precipitation</p>
-			  <p>Humidity</p>
+			  <p>{this.props.wind}</p>
+			  <p>{this.props.humidity}</p>
+			  <p>{this.props.humidity}</p>
 			</div>
 			)
 	}

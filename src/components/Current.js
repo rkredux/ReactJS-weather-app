@@ -8,9 +8,9 @@ class Current extends Component{
 	render(){
 		return(
 			<div className="row secondrow">
-			    <Temperature></Temperature>
-				<Location></Location>
-				<Time></Time>
+			    <Temperature temp={this.props.temperature}></Temperature>
+				<Location place={this.props.location}></Location>
+				<Time time={this.props.time}></Time>
 			</div>
 			)
 	}

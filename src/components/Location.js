@@ -5,7 +5,7 @@ class Location extends Component{
 	render(){
 		return(
 			<div className="location">
-			<p>Washington DC</p>
+			<p>{this.props.place}</p>
 			</div>
 			)
 	}

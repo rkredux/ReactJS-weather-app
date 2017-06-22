@@ -5,7 +5,7 @@ class Time extends Component{
 	render(){
 		return(
 			<div className="time">
-			  <p>14:25</p>
+			  <p>{this.props.time}</p>
 			</div>
 			)
 	}

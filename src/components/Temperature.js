@@ -5,7 +5,7 @@ class Temperature extends Component{
 	render(){
 		return(
 			<div className="temperature">
-			  <p>70 F</p>
+			  <p>{this.props.temp}</p>
 			</div>
 			)
 	}
