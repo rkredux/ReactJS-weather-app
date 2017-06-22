@@ -6,13 +6,8 @@ import Conditions from "./components/Conditions.js";
 import Forecast from "./components/Forecast.js"; 
 import Clothing from "./components/Clothing.js";
 import "./weather-icons/css/weather-icons.css"; 
-import fetchWeatherData from "./components/api.js";
-// import axios from "axios"; 
-// import jsonp from "jsonp"; 
-// import fetchJsonp from "fetch-jsonp"; 
-// import ajax from "jquery"; 
-
-
+import axios from "axios"; 
+// import fetchWeatherData from "./components/api.js";
 
 
 
@@ -23,21 +18,45 @@ class App extends Component {
 
   constructor(props){
     super(props); 
+    this.state = {
+      city: "city", 
+      date: "date", 
+      windSpeed: "Windspeed", 
+      currentTemp: "Temperature",  
+      humidity: "Humidity", 
+      iconIndicator: "Icon", 
+      iconDescription: "Feels Like"
+    }; 
+      // this.obtainWeatherData = this.obtainWeatherData.bind(this); 
   }
 
 
 
-componentDidMount(){
-  if ("geolocation" in navigator) {
-   navigator.geolocation.getCurrentPosition(function(position){
-     const lat = position.coords.latitude, 
-           long = position.coords.longitude;     
-     console.log(fetchWeatherData(lat, long)); 
-   })
-} else {
-  console.log("API not available"); 
-}
-}
+
+
+  componentDidMount(){
+
+   if ("geolocation" in navigator) {
+
+    let lat, long; 
+    navigator.geolocation.getCurrentPosition((position) => {
+            lat = position.coords.latitude;  
+            long = position.coords.longitude;             
+            const endPoint = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=06f1ff51df983fcf30dcf9fc0c363485`;
+            axios.get(endPoint)
+                 .then((response) => {
+                  const info = response.data; 
+                  const weatherObject = {city: info.name, date:info.dt, windSpeed:info.wind.speed, currentTemp:info.main.temp, humidity: info.main.humidity, iconIndicator: info.weather[0].main, iconDescription: info.weather[0].description};
+                  console.log(weatherObject);
+                  this.setState(function(){
+                    return weatherObject; 
+                  }); 
+                 });
+
+          }); 
+    } 
+    console.log(this.state); 
+  }
 
 
 render() {
@@ -47,9 +66,9 @@ render() {
 
             <Icon></Icon>
 
-            <Current></Current>
+            <Current temperature={this.state.currentTemp} location={this.state.city} time={this.state.date}></Current>
             
-            <Conditions></Conditions>
+            <Conditions wind={this.state.windSpeed} precipitation={this.state.humidity} humidity={this.state.humidity}></Conditions>
           
             <Forecast></Forecast>
        
@@ -59,6 +78,8 @@ render() {
       </div>
     );
   }
+
+
 }
 
 export default App;
