@@ -10,7 +10,7 @@ class Current extends Component{
 			<div className="row secondrow">
 			    <Temperature temp={this.props.temperature}></Temperature>
 				<Location place={this.props.location}></Location>
-				<Time time={this.props.time}></Time>
+				<Time></Time>
 			</div>
 			)
 	}
