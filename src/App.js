@@ -7,6 +7,7 @@ import Forecast from "./components/Forecast.js";
 import Clothing from "./components/Clothing.js";
 import "./weather-icons/css/weather-icons.css"; 
 import axios from "axios"; 
+
 // import fetchWeatherData from "./components/api.js";
 
 
@@ -46,7 +47,8 @@ class App extends Component {
             axios.get(endPoint)
                  .then((response) => {
                   const info = response.data; 
-                  const weatherObject = {city: info.name, date:info.dt, windSpeed:info.wind.speed, currentTemp:info.main.temp, humidity: info.main.humidity, iconIndicator: info.weather[0].main, iconDescription: info.weather[0].description};
+                  console.log(info); 
+                  const weatherObject = {city: info.name, windSpeed:info.wind.speed, windDirection:info.wind.deg, currentTemp:parseInt(info.main.temp/10), humidity: info.main.humidity, iconIndicator: info.weather[0].main, iconDescription: info.weather[0].description};
                   console.log(weatherObject);
                   this.setState(function(){
                     return weatherObject; 
@@ -66,9 +68,9 @@ render() {
 
             <Icon></Icon>
 
-            <Current temperature={this.state.currentTemp} location={this.state.city} time={this.state.date}></Current>
+            <Current temperature={this.state.currentTemp} location={this.state.city}></Current>
             
-            <Conditions wind={this.state.windSpeed} precipitation={this.state.humidity} humidity={this.state.humidity}></Conditions>
+            <Conditions wind={this.state.windSpeed} windDirection = {this.state.windDirection} precipitation={this.state.humidity} humidity={this.state.humidity}></Conditions>
           
             <Forecast></Forecast>
        
